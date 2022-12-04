@@ -1,13 +1,13 @@
 import { MutableRefObject } from "react";
-import { ModalData } from "./AnimatedModal";
+import { ModalData } from "./GlobalModal";
 
-export type AnimatedModalRef = {
+export type GlobalModalRef = {
   show: () => void;
   hide: () => void;
 };
 
-export default class AnimatedModalController {
-  static modalRef: MutableRefObject<AnimatedModalRef>;
+export default class ModalController {
+  static modalRef: MutableRefObject<GlobalModalRef>;
   static setModalRef = (ref: any) => {
     // @ts-ignore
     this.modalRef = ref;

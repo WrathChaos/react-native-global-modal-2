@@ -1,16 +1,14 @@
-import AnimatedModalController, {
-  AnimatedModalRef,
-} from "./AnimatedModalController";
+import ModalController, { GlobalModalRef } from "./ModalController";
 import { ButtonProps } from "./components/button/Button";
 import { OutlineButtonProps } from "./components/outline-button/OutlineButton";
-import { AnimatedModalProps, ModalData } from "./AnimatedModal";
+import { GlobalModalProps, ModalData } from "./GlobalModal";
 
-export { default } from "./AnimatedModal";
-export { AnimatedModalController };
+export { default } from "./GlobalModal";
+export { ModalController };
 export type {
   ModalData,
-  AnimatedModalRef,
+  GlobalModalRef,
   ButtonProps,
   OutlineButtonProps,
-  AnimatedModalProps,
+  GlobalModalProps,
 };

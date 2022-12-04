@@ -6,9 +6,7 @@ import React, {
 } from "react";
 import { StyleSheet, View, StyleProp, ViewStyle } from "react-native";
 import Modal, { ModalProps } from "react-native-modal";
-import AnimatedModalController, {
-  AnimatedModalRef,
-} from "./AnimatedModalController";
+import ModalController, { GlobalModalRef } from "./ModalController";
 import Title, { TitleProps } from "./components/title/Title";
 import Button, { ButtonProps } from "./components/button/Button";
 import OutlineButton, {
@@ -30,15 +28,15 @@ export interface ModalData {
   onHide?: () => void;
 }
 
-export interface AnimatedModalProps extends Partial<ModalProps> {
+export interface GlobalModalProps extends Partial<ModalProps> {
   TouchableComponent?: any;
   style?: StyleProp<ViewStyle>;
   buttonsContainerStyle?: StyleProp<ViewStyle>;
 }
 
-const AnimatedModal: React.FC<AnimatedModalProps> = forwardRef(
+const GlobalModal: React.FC<GlobalModalProps> = forwardRef(
   ({ style, buttonsContainerStyle, TouchableComponent, ...rest }) => {
-    const modalRef = useRef<AnimatedModalRef>();
+    const modalRef = useRef<GlobalModalRef>();
     const [modalVisible, setModalVisible] = useStateWithCallback(false);
     const [data, setData] = useStateWithCallback<ModalData>(0);
     const {
@@ -56,7 +54,7 @@ const AnimatedModal: React.FC<AnimatedModalProps> = forwardRef(
     } = data;
 
     useLayoutEffect(() => {
-      AnimatedModalController.setModalRef(modalRef);
+      ModalController.setModalRef(modalRef);
     }, []);
 
     useImperativeHandle(
@@ -84,7 +82,7 @@ const AnimatedModal: React.FC<AnimatedModalProps> = forwardRef(
           <Title
             title={title}
             description={description}
-            onClosePress={AnimatedModalController.hide}
+            onClosePress={ModalController.hide}
             {...titleProps}
           />
           <View style={[styles.buttonsContainer, buttonsContainerStyle]}>
@@ -108,7 +106,7 @@ const AnimatedModal: React.FC<AnimatedModalProps> = forwardRef(
   },
 );
 
-export default AnimatedModal;
+export default GlobalModal;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,16 +1,16 @@
-<img alt="React Native Animated Modal" src="assets/logo.png" width="1050"/>
+<img alt="React Native Global Modal" src="assets/logo.png" width="1050"/>
 
-[![React Native Animated Modal](https://img.shields.io/badge/-Extremely%20easy%20to%20create%20a%20React%20Native%20Component%20Library%20with%20both%20Stateful%20and%20Functional%20Component%20Examples-orange?style=for-the-badge)](https://github.com/WrathChaos/react-native-animated-modal)
+[![React Native Global Modal](https://img.shields.io/badge/-Extremely%20easy%20to%20create%20a%20React%20Native%20Component%20Library%20with%20both%20Stateful%20and%20Functional%20Component%20Examples-orange?style=for-the-badge)](https://github.com/WrathChaos/react-native-global-modal-2)
 
-[![npm version](https://img.shields.io/npm/v/react-native-animated-modal.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-animated-modal)
-[![npm](https://img.shields.io/npm/dt/react-native-animated-modal.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-animated-modal)
+[![npm version](https://img.shields.io/npm/v/react-native-global-modal-2.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-global-modal-2)
+[![npm](https://img.shields.io/npm/dt/react-native-global-modal-2.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-global-modal-2)
 ![Platform - Android and iOS](https://img.shields.io/badge/platform-Android%20%7C%20iOS-blue.svg?style=for-the-badge)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
 
 <p align="center">
-  <img alt="React Native Animated Modal"
-        src="assets/Screenshots/typescript.jpg" />
+  <img alt="React Native Global Modal"
+        src="assets/Screenshots/react-native-animated-modal.png" />
 </p>
 
 # Installation
@@ -18,7 +18,7 @@
 Add the dependency:
 
 ```bash
-npm i react-native-animated-modal
+npm i react-native-global-modal-2
 ```
 
 ## Peer dependencies
@@ -32,26 +32,26 @@ npm i react-native-animated-modal
 ## Import
 
 ```jsx
-import AnimatedModal, { AnimatedModalController } from "react-native-animated-modal"
+import GlobalModal, { ModalController } from "react-native-global-modal-2"
 ```
 
 ## Fundamental Usage
 
-In `App.tsx` or wherever your root is, simply put the `AnimatedModal` to root 
-You can open it with custom `ModalData` with `AnimatedModalController` 
+In `App.tsx` or wherever your root is, simply put the `GlobalModal` to root 
+You can open it with custom `ModalData` with `ModalController` 
 
 Note: This is just an example of the usage
 ```jsx
 <NavigationContainer>
   <MainStack/>
-  <AnimatedModal/>
+  <GlobalModal/>
 </NavigationContainer>
 ```
 
-Call/control the animated modal with `AnimatedModalController`
+Call/control the animated modal with `ModalController`
 **Custom layout option is WIP, coming soon!**
 ```js
-import { AnimatedModalController } from "react-native-animated-modal"
+import { ModalController } from "react-native-global-modal-2"
 
 // Example of ModalData
 // You can customize the modal as you want with this format
@@ -67,8 +67,10 @@ const data: ModalData = {
   onPrimaryButtonPress: () => {},
   onOutlineButtonPress: () => {},
 };
-AnimatedModalController.show(data);
-AnimatedModalController.hide()
+// Show
+ModalController.show(data);
+// Hide
+ModalController.hide()
 ```
 
 
@@ -77,10 +79,10 @@ AnimatedModalController.hide()
 You can use any props from `react-native-modal` with prop drilling
 
 ```jsx 
-<AnimatedModal
+<GlobalModal
     animationIn="fadeIn"
     animationOut="fadeOut"
-    onBackdropPress={AnimatedModalController.hide}
+    onBackdropPress={ModalController.hide}
 />
 ```
 
@@ -145,9 +147,13 @@ should work of the example project.
   - [ ] One Button
   - [ ] One Outline Button
 - [ ] **Custom Layout Feature**
+- [ ] More and better screenshots
 - [ ] Write an article about the lib on Medium
 
 ## Credits 
+
+I inspired from [Roycechua's global modal example](https://github.com/roycechua/rn-global-modal-control-example)
+Thank you so much [Roycechua](https://github.com/roycechua) 😍
 
 I heavily inspired the design by [Patrick Marx](https://dribbble.com/shots/10762430/attachments/2430949?mode=media)
 Thank you so much sir 🥳
@@ -158,4 +164,4 @@ FreakyCoder, kurayogun@gmail.com
 
 ## License
 
-React Native Animated Modal is available under the MIT license. See the LICENSE file for more info.
+React Native Global Modal is available under the MIT license. See the LICENSE file for more info.

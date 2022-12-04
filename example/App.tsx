@@ -10,7 +10,7 @@ import {
 /**
  * ? Local Imports
  */
-import AnimatedModal, {AnimatedModalController, ModalData} from './lib';
+import GlobalModal, {ModalController, ModalData} from './build/dist';
 
 interface AppProps {
   style?: StyleProp<ViewStyle>;
@@ -33,15 +33,15 @@ const App: React.FC<AppProps> = () => {
             onPrimaryButtonPress: () => {},
             onOutlineButtonPress: () => {},
           };
-          AnimatedModalController.show(data);
+          ModalController.show(data);
         }}
       >
         <Text>Open Modal</Text>
       </TouchableOpacity>
-      <AnimatedModal
+      <GlobalModal
         animationIn="fadeIn"
         animationOut="fadeOut"
-        onBackdropPress={AnimatedModalController.hide}
+        onBackdropPress={ModalController.hide}
       />
     </View>
   );
