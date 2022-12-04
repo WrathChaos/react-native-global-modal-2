@@ -7,6 +7,8 @@ import {
   ViewStyle,
   ImageSourcePropType,
   Pressable,
+  ImageStyle,
+  TextStyle,
 } from "react-native";
 /**
  * ? Local Imports
@@ -15,6 +17,10 @@ import styles from "./Title.style";
 
 export interface TitleProps {
   style?: StyleProp<ViewStyle>;
+  headerStyle?: StyleProp<ViewStyle>;
+  iconImageStyle?: StyleProp<ImageStyle>;
+  titleTextStyle?: StyleProp<TextStyle>;
+  descriptionTextStyle?: StyleProp<TextStyle>;
   title?: string;
   description?: string;
   imageSource?: ImageSourcePropType;
@@ -25,6 +31,10 @@ const Title: React.FC<TitleProps> = ({
   title,
   description,
   style,
+  headerStyle,
+  iconImageStyle,
+  titleTextStyle,
+  descriptionTextStyle,
   imageSource = require("../../local-assets/home.png"),
   onClosePress,
 }) => {
@@ -33,20 +43,22 @@ const Title: React.FC<TitleProps> = ({
       <Image
         resizeMode="contain"
         source={imageSource}
-        style={styles.iconImageStyle}
+        style={[styles.iconImageStyle, iconImageStyle]}
       />
     </View>
   );
 
   const renderTitle = () => (
     <View style={styles.titleContainer}>
-      <Text style={styles.titleTextStyle}>{title}</Text>
+      <Text style={[styles.titleTextStyle, titleTextStyle]}>{title}</Text>
     </View>
   );
 
   const renderDescription = () => (
     <View style={styles.descriptionContainer}>
-      <Text style={styles.descriptionTextStyle}>{description}</Text>
+      <Text style={[styles.descriptionTextStyle, descriptionTextStyle]}>
+        {description}
+      </Text>
     </View>
   );
 
@@ -61,7 +73,7 @@ const Title: React.FC<TitleProps> = ({
 
   return (
     <View style={[styles.container, style]}>
-      <View style={styles.header}>
+      <View style={[styles.header, headerStyle]}>
         {renderIcon()}
         {renderTitle()}
         {renderCloseButton()}

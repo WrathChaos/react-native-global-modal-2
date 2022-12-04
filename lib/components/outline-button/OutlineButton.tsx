@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Text, StyleProp, ViewStyle } from "react-native";
+import { Pressable, Text, StyleProp, ViewStyle, TextStyle } from "react-native";
 /**
  * ? Local Imports
  */
@@ -9,6 +9,7 @@ export interface OutlineButtonProps {
   text?: string;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   TouchableComponent?: any;
 }
 
@@ -16,11 +17,12 @@ const OutlineButton: React.FC<OutlineButtonProps> = ({
   text,
   onPress,
   style,
+  textStyle,
   TouchableComponent = Pressable,
 }) => {
   return (
     <TouchableComponent style={[styles.container, style]} onPress={onPress}>
-      <Text style={styles.textStyle}>{text}</Text>
+      <Text style={[styles.textStyle, textStyle]}>{text}</Text>
     </TouchableComponent>
   );
 };
