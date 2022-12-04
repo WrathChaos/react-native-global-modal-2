@@ -15,12 +15,13 @@ import OutlineButton, {
 import useStateWithCallback from "./helpers/useStateWithCallback";
 
 export interface ModalData {
-  title: string;
-  description: string;
-  primaryButtonText: string;
-  outlineButtonText: string;
-  onPrimaryButtonPress: () => void;
-  onOutlineButtonPress: () => void;
+  customLayout?: React.ReactNode | React.ReactNode[];
+  title?: string;
+  description?: string;
+  primaryButtonText?: string;
+  outlineButtonText?: string;
+  onPrimaryButtonPress?: () => void;
+  onOutlineButtonPress?: () => void;
   titleProps?: TitleProps;
   buttonProps?: ButtonProps;
   outlineButtonProps?: OutlineButtonProps;
@@ -51,6 +52,7 @@ const GlobalModal: React.FC<GlobalModalProps> = forwardRef(
       buttonProps,
       outlineButtonProps,
       titleProps,
+      customLayout,
     } = data;
 
     useLayoutEffect(() => {
@@ -75,6 +77,14 @@ const GlobalModal: React.FC<GlobalModalProps> = forwardRef(
       }),
       [onHide, onShow, setModalVisible],
     );
+
+    if (customLayout) {
+      return (
+        <Modal {...rest} isVisible={modalVisible}>
+          {customLayout}
+        </Modal>
+      );
+    }
 
     return (
       <Modal {...rest} isVisible={modalVisible}>

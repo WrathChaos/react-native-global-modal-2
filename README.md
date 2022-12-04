@@ -49,9 +49,8 @@ Note: This is just an example of the usage
 ```
 
 Call/control the animated modal with `ModalController`
-**Custom layout option is WIP, coming soon!**
 ```js
-import { ModalController } from "react-native-global-modal-2"
+import { ModalController, ModalData } from "react-native-global-modal-2"
 
 // Example of ModalData
 // You can customize the modal as you want with this format
@@ -73,6 +72,32 @@ ModalController.show(data);
 ModalController.hide()
 ```
 
+## Custom Layout Usage
+
+You can completely use your own layout with `customLayout`
+
+```jsx 
+import { ModalController, ModalData } from "react-native-global-modal-2"
+
+
+const data: ModalData = {
+  customLayout: (
+    <View
+      style={{
+        borderRadius: 16,
+        paddingTop: 24,
+        paddingLeft: 24,
+        paddingRight: 24,
+        paddingBottom: 16,
+        backgroundColor: '#fff',
+      }}>
+      <Text>Hello</Text>
+    </View>
+  ),
+};
+ModalController.show(data);
+```
+
 
 ### Customized Example
 
@@ -80,9 +105,9 @@ You can use any props from `react-native-modal` with prop drilling
 
 ```jsx 
 <GlobalModal
-    animationIn="fadeIn"
-    animationOut="fadeOut"
-    onBackdropPress={ModalController.hide}
+  animationIn="fadeIn"
+  animationOut="fadeOut"
+  onBackdropPress={ModalController.hide}
 />
 ```
 
