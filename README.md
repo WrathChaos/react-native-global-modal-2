@@ -54,7 +54,7 @@ import { ModalController, ModalData } from "react-native-global-modal-2"
 
 // Example of ModalData
 // You can customize the modal as you want with this format
-// Custom layout option is WIP, coming soon!
+// **Custom layout** option is also available!
 const data: ModalData = {
   title: 'Update available',
   description: 'A new software version is available for download',
@@ -171,7 +171,7 @@ should work of the example project.
   - [ ] Notification Type
   - [ ] One Button
   - [ ] One Outline Button
-- [ ] **Custom Layout Feature**
+- [x] ~~Custom Layout Feature~~
 - [ ] More and better screenshots
 - [ ] Write an article about the lib on Medium
 
