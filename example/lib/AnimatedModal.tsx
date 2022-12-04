@@ -3,28 +3,22 @@ import React, {
   forwardRef,
   useLayoutEffect,
   useImperativeHandle,
-} from "react";
-import {
-  Modal,
-  StyleSheet,
-  Dimensions,
-  View,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
+} from 'react';
+import {StyleSheet, Dimensions, View, StyleProp, ViewStyle} from 'react-native';
+import Modal, {ModalProps} from 'react-native-modal';
 import AnimatedModalController, {
   AnimatedModalRef,
-} from "./AnimatedModalController";
-import Title from "./components/title/Title";
-import Button, { ButtonProps } from "./components/button/Button";
+} from './AnimatedModalController';
+import Title from './components/title/Title';
+import Button, {ButtonProps} from './components/button/Button';
 import OutlineButton, {
   OutlineButtonProps,
-} from "./components/outline-button/OutlineButton";
-import useStateWithCallback from "./helpers/useStateWithCallback";
+} from './components/outline-button/OutlineButton';
+import useStateWithCallback from './helpers/useStateWithCallback';
 
-const { width: ScreenWidth } = Dimensions.get("screen");
+const {width: ScreenWidth} = Dimensions.get('screen');
 
-export interface AnimatedModalProps {
+export interface AnimatedModalProps extends Partial<ModalProps> {
   title: string;
   description: string;
   primaryButtonText: string;
@@ -83,13 +77,7 @@ const AnimatedModal: React.FC<AnimatedModalProps> = forwardRef(
     );
 
     return (
-      <Modal
-        animationType="fade"
-        transparent
-        {...rest}
-        onRequestClose={AnimatedModalController.hide}
-        visible={modalVisible}
-      >
+      <Modal {...rest} isVisible={modalVisible}>
         <View style={[styles.container, style]}>
           <Title
             title={title}
@@ -122,22 +110,22 @@ export default AnimatedModal;
 const styles = StyleSheet.create({
   container: {
     padding: 24,
-    marginTop: "50%",
+    marginTop: '50%',
     borderRadius: 16,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     width: ScreenWidth * 0.9,
     paddingTop: 24,
     paddingLeft: 24,
     paddingRight: 24,
     paddingBottom: 16,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   buttonsContainer: {
     marginTop: 16,
     marginLeft: 40,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   outlineButton: {
     marginLeft: 16,
