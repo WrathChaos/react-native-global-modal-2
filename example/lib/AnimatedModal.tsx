@@ -3,57 +3,67 @@ import React, {
   forwardRef,
   useLayoutEffect,
   useImperativeHandle,
-} from 'react';
-import {StyleSheet, Dimensions, View, StyleProp, ViewStyle} from 'react-native';
-import Modal, {ModalProps} from 'react-native-modal';
+  useState,
+} from "react";
+import {
+  StyleSheet,
+  Dimensions,
+  View,
+  StyleProp,
+  ViewStyle,
+  ImageSourcePropType,
+} from "react-native";
+import Modal, { ModalProps } from "react-native-modal";
 import AnimatedModalController, {
   AnimatedModalRef,
-} from './AnimatedModalController';
-import Title from './components/title/Title';
-import Button, {ButtonProps} from './components/button/Button';
+} from "./AnimatedModalController";
+import Title, { TitleProps } from "./components/title/Title";
+import Button, { ButtonProps } from "./components/button/Button";
 import OutlineButton, {
   OutlineButtonProps,
-} from './components/outline-button/OutlineButton';
-import useStateWithCallback from './helpers/useStateWithCallback';
+} from "./components/outline-button/OutlineButton";
+import useStateWithCallback from "./helpers/useStateWithCallback";
 
-const {width: ScreenWidth} = Dimensions.get('screen');
+const { width: ScreenWidth } = Dimensions.get("screen");
 
-export interface AnimatedModalProps extends Partial<ModalProps> {
+export interface ModalData {
   title: string;
   description: string;
   primaryButtonText: string;
   outlineButtonText: string;
   onPrimaryButtonPress: () => void;
   onOutlineButtonPress: () => void;
-  // Optionals
-  TouchableComponent?: any;
+  titleProps?: TitleProps;
   buttonProps?: ButtonProps;
   outlineButtonProps?: OutlineButtonProps;
-  style?: StyleProp<ViewStyle>;
-  buttonsContainerStyle?: StyleProp<ViewStyle>;
   onShow?: () => void;
   onHide?: () => void;
 }
 
+export interface AnimatedModalProps extends Partial<ModalProps> {
+  TouchableComponent?: any;
+  style?: StyleProp<ViewStyle>;
+  buttonsContainerStyle?: StyleProp<ViewStyle>;
+}
+
 const AnimatedModal: React.FC<AnimatedModalProps> = forwardRef(
-  ({
-    style,
-    buttonsContainerStyle,
-    title,
-    description,
-    primaryButtonText,
-    outlineButtonText,
-    buttonProps,
-    outlineButtonProps,
-    onShow,
-    onHide,
-    onPrimaryButtonPress,
-    onOutlineButtonPress,
-    TouchableComponent,
-    ...rest
-  }) => {
+  ({ style, buttonsContainerStyle, TouchableComponent, ...rest }) => {
     const modalRef = useRef<AnimatedModalRef>();
     const [modalVisible, setModalVisible] = useStateWithCallback(false);
+    const [data, setData] = useStateWithCallback<ModalData>(0);
+    const {
+      title,
+      description,
+      primaryButtonText,
+      outlineButtonText,
+      onShow,
+      onHide,
+      onPrimaryButtonPress,
+      onOutlineButtonPress,
+      buttonProps,
+      outlineButtonProps,
+      titleProps,
+    } = data;
 
     useLayoutEffect(() => {
       AnimatedModalController.setModalRef(modalRef);
@@ -62,9 +72,11 @@ const AnimatedModal: React.FC<AnimatedModalProps> = forwardRef(
     useImperativeHandle(
       modalRef,
       () => ({
-        show: () => {
-          setModalVisible(true, () => {
-            onShow?.();
+        show: (_data?: any) => {
+          setData(_data, () => {
+            setModalVisible(true, () => {
+              onShow?.();
+            });
           });
         },
         hide: () => {
@@ -83,6 +95,7 @@ const AnimatedModal: React.FC<AnimatedModalProps> = forwardRef(
             title={title}
             description={description}
             onClosePress={AnimatedModalController.hide}
+            {...titleProps}
           />
           <View style={[styles.buttonsContainer, buttonsContainerStyle]}>
             <Button
@@ -109,23 +122,19 @@ export default AnimatedModal;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
-    marginTop: '50%',
     borderRadius: 16,
-    backgroundColor: '#fff',
-    width: ScreenWidth * 0.9,
     paddingTop: 24,
     paddingLeft: 24,
     paddingRight: 24,
     paddingBottom: 16,
-    alignSelf: 'center',
+    backgroundColor: "#fff",
   },
   buttonsContainer: {
     marginTop: 16,
     marginLeft: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
   outlineButton: {
     marginLeft: 16,

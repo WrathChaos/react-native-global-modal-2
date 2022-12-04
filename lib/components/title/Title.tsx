@@ -13,7 +13,7 @@ import {
  */
 import styles from "./Title.style";
 
-interface TitleProps {
+export interface TitleProps {
   style?: StyleProp<ViewStyle>;
   title: string;
   description: string;

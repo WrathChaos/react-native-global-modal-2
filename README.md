@@ -21,6 +21,12 @@ Add the dependency:
 npm i react-native-animated-modal
 ```
 
+## Peer dependencies
+
+```json
+"react-native-modal": "^13.0.1"
+```
+
 # Usage
 
 ## Import
@@ -39,18 +45,37 @@ import AnimatedModal, { AnimatedModalController } from "react-native-animated-mo
     outlineButtonText="Not now"
     onPrimaryButtonPress={() => {}}
     onOutlineButtonPress={() => {}}
+/>
+```
+
+
+### Customized Example
+
+You can use any props from `react-native-modal` with prop drilling
+
+```jsx 
+<AnimatedModal
+    animationIn="fadeIn"
+    animationOut="fadeOut"
+    title="Update available"
+    description="A new software version is available for download"
+    primaryButtonText="Update"
+    outlineButtonText="Not now"
+    onPrimaryButtonPress={() => {}}
+    onOutlineButtonPress={() => {}}
+    onBackdropPress={AnimatedModalController.hide}
     onShow={() => {
-        console.log('onShow');
+      console.log('onShow');
     }}
     onHide={() => {
-        console.log('onHide');
+      console.log('onHide');
     }}
 />
 ```
 
 ## Example Project 😍
 
-You can checkout the example project 🥰
+You can check out the example project 🥰
 
 Simply run
 
@@ -63,30 +88,58 @@ should work of the example project.
 
 ## Fundamentals
 
-| Property    |  Type  |  Default  | Description           |
-| ----------- | :----: | :-------: | --------------------- |
-| title       | string | undefined | change the title      |
-| description | string | undefined | change the descrition |
+| Property             |   Type   |  Default  | Description                                     |
+|----------------------|:--------:| :-------: |-------------------------------------------------|
+| title                |  string  | undefined | change the title                                |
+| description          |  string  | undefined | change the descrition                           |
+| primaryButtonText    |  string  | undefined | change the primary button's text                |
+| onPrimaryButtonPress | function | undefined | set function when the primary button is pressed |
+| onOutlineButtonPress | function | undefined | set function when the primary button is pressed |
 
 ## Customization (Optionals)
 
-| Property       |   Type    |  Default  | Description                                                            |
-| -------------- | :-------: | :-------: | ---------------------------------------------------------------------- |
-| enableButton   |  boolean  |   false   | let you enable the button (must use it for button)                     |
-| onPress        | function  | undefined | set your own logic for the button functionality when it is pressed     |
-| buttonText     |  string   | undefined | change the button's text                                               |
-| style          | ViewStyle |  default  | set or override the style object for the main container                |
-| buttonStyle    | ViewStyle |  default  | set or override the style object for the button style                  |
-| ImageComponent |   Image   |  default  | set your own component instead of default react-native Image component |
+| Property       |    Type     |  Default  | Description                                                       |
+| -------------- |:-----------:|:---------:|-------------------------------------------------------------------|
+| style          |  ViewStyle  |  default  | set or override the style object for the main container           |
+| buttonsContainerStyle    |  ViewStyle  |  default  | set or override the style object for the buttons' container style |
+| TouchableComponent |  component  | Pressable | set your own component instead of default `Pressable` component   |
+| buttonProps | ButtonProps |  default  | change button's props **(primary button)**                        |
+| outlineButtonProps | OutlineButtonProps |  default  | change button's props **(outline button)**                        |
+
+
+## Customization [Button] Component
+
+| Property           |   Type    |  Default  | Description                                            |
+|--------------------|:---------:|:---------:|--------------------------------------------------------|
+| title              |  string   | undefined | change the title                                       |
+| onPress | function  | undefined | set your function                                      |
+| style              | ViewStyle |  default  | set or override the style object for the main container |
+| textStyle          | TextStyle |  default  | set or override the style object for the text style    |
+
+
+## Customization [OutlineButton] Component
+
+| Property           |   Type    |  Default  | Description                                            |
+|--------------------|:---------:|:---------:|--------------------------------------------------------|
+| title              |  string   | undefined | change the title                                       |
+| onPress | function  | undefined | set your function                                      |
+| style              | ViewStyle |  default  | set or override the style object for the main container |
+| textStyle          | TextStyle |  default  | set or override the style object for the text style    |
 
 ## Future Plans
 
 - [x] ~~LICENSE~~
+- [ ] More built-in modal types
+  - [ ] Notification Type
+  - [ ] One Button
+  - [ ] One Outline Button
+- [ ] Custom Layout Feature
 - [ ] Write an article about the lib on Medium
 
-# Change Log
+## Credits 
 
-Change log will be here !
+I heavily inspired the design by [Patrick Marx](https://dribbble.com/shots/10762430/attachments/2430949?mode=media)
+Thank you so much sir 🥳
 
 ## Author
 

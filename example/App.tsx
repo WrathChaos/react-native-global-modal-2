@@ -22,7 +22,17 @@ const App: React.FC<AppProps> = () => {
       <TouchableOpacity
         style={styles.buttonStyle}
         onPress={() => {
-          AnimatedModalController.show();
+          AnimatedModalController.show({
+            title: 'Update available',
+            description: 'A new software version is available for download',
+            primaryButtonText: 'Update',
+            outlineButtonText: 'Not now',
+            titleProps: {
+              imageSource: require('./assets/cross.png'),
+            },
+            onPrimaryButtonPress: () => {},
+            onOutlineButtonPress: () => {},
+          });
         }}
       >
         <Text>Open Modal</Text>
@@ -30,19 +40,7 @@ const App: React.FC<AppProps> = () => {
       <AnimatedModal
         animationIn="fadeIn"
         animationOut="fadeOut"
-        title="Update available"
-        description="A new software version is available for download"
-        primaryButtonText="Update"
-        outlineButtonText="Not now"
-        onPrimaryButtonPress={() => {}}
-        onOutlineButtonPress={() => {}}
         onBackdropPress={AnimatedModalController.hide}
-        onShow={() => {
-          console.log('onShow');
-        }}
-        onHide={() => {
-          console.log('onHide');
-        }}
       />
     </View>
   );

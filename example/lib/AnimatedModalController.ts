@@ -12,9 +12,9 @@ export default class AnimatedModalController {
     this.modalRef = ref;
   };
 
-  static show = (message?: string) => {
+  static show = (data: any) => {
     // @ts-ignore
-    this.modalRef.current?.show(message);
+    this.modalRef.current?.show(data);
   };
   static hide = () => {
     // @ts-ignore
