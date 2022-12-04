@@ -25,23 +25,35 @@ const App: React.FC<AppProps> = () => {
       <TouchableOpacity
         style={styles.buttonStyle}
         onPress={() => {
+          // const data: ModalData = {
+          //   customLayout: (
+          //     <View
+          //       style={{
+          //         borderRadius: 16,
+          //         paddingTop: 24,
+          //         paddingLeft: 24,
+          //         paddingRight: 24,
+          //         paddingBottom: 16,
+          //         backgroundColor: '#fff',
+          //       }}>
+          //       <Text>Hello</Text>
+          //     </View>
+          //   ),
+          // };
           const data: ModalData = {
-            customLayout: (
-              <View
-                style={{
-                  borderRadius: 16,
-                  paddingTop: 24,
-                  paddingLeft: 24,
-                  paddingRight: 24,
-                  paddingBottom: 16,
-                  backgroundColor: '#fff',
-                }}>
-                <Text>Hello</Text>
-              </View>
-            ),
+            title: 'Update available',
+            description: 'A new software version is available for download',
+            primaryButtonText: 'Update',
+            outlineButtonText: 'Not now',
+            titleProps: {
+              imageSource: require('./assets/cross.png'),
+            },
+            onPrimaryButtonPress: () => {},
+            onOutlineButtonPress: () => {},
           };
           ModalController.show(data);
-        }}>
+        }}
+      >
         <Text>Open Modal</Text>
       </TouchableOpacity>
       <GlobalModal
