@@ -1,9 +1,9 @@
-import React from 'react';
-import {Pressable, Text, StyleProp, ViewStyle} from 'react-native';
+import React from "react";
+import { Pressable, Text, StyleProp, ViewStyle } from "react-native";
 /**
  * ? Local Imports
  */
-import styles from './OutlineButton.style';
+import styles from "./OutlineButton.style";
 
 export interface OutlineButtonProps {
   text: string;

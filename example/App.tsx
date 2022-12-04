@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, StyleProp, ViewStyle, TouchableOpacity, Text} from 'react-native';
+import {
+  View,
+  StyleProp,
+  ViewStyle,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+} from 'react-native';
 /**
  * ? Local Imports
  */
@@ -12,14 +19,7 @@ interface AppProps {
 
 const App: React.FC<AppProps> = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#102B43',
-      }}
-    >
+    <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
           AnimatedModalController.show();
@@ -27,10 +27,31 @@ const App: React.FC<AppProps> = () => {
       >
         <Text>Hello</Text>
       </TouchableOpacity>
-
-      <AnimatedModal />
+      <AnimatedModal
+        title="Update available"
+        description="A new software version is available for download"
+        primaryButtonText="Update"
+        outlineButtonText="Not now"
+        onPrimaryButtonPress={() => {}}
+        onOutlineButtonPress={() => {}}
+        onShow={() => {
+          console.log('onShow');
+        }}
+        onHide={() => {
+          console.log('onHide');
+        }}
+      />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#102B43',
+  },
+});
 
 export default App;
