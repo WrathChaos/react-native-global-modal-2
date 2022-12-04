@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "18.1.0",
     "react-native": "0.70.6",
+    "react-native-global-modal-2": "^1.0.0",
     "react-native-modal": "^13.0.1"
   },
   "devDependencies": {

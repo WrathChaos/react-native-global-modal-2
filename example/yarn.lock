@@ -5748,6 +5748,13 @@
     "jscodeshift" "^0.13.1"
     "nullthrows" "^1.1.1"
 
+"react-native-global-modal-2@^1.0.0":
+  "integrity" "sha512-xo9/8rsXD6oSgUxxrNbDQ3w6z6o/v0FlxgDV7DCc7oPN0KfppDFd6AhGvjdVRrH1h/tO0umaGBiAr9LqioKgGQ=="
+  "resolved" "https://registry.npmjs.org/react-native-global-modal-2/-/react-native-global-modal-2-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "react-native-modal" "^13.0.1"
+
 "react-native-gradle-plugin@^0.70.3":
   "integrity" "sha512-oOanj84fJEXUg9FoEAQomA8ISG+DVIrTZ3qF7m69VQUJyOGYyDZmPqKcjvRku4KXlEH6hWO9i4ACLzNBh8gC0A=="
   "resolved" "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.3.tgz"

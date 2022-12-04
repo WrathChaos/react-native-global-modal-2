@@ -1,7 +1,7 @@
 {
   "name": "react-native-global-modal-2",
   "version": "1.0.0",
-  "description": "🌍 Global modal, callable from anywhere on the app for React Native",
+  "description": "🌍 Global modal and callable from anywhere on the app for React Native",
   "main": "./build/dist/index.js",
   "repository": "git@github.com:WrathChaos/react-native-animated-modal.git",
   "author": "FreakyCoder <kurayogun@gmail.com>",

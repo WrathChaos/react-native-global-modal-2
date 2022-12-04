@@ -1,6 +1,6 @@
 <img alt="React Native Global Modal" src="assets/logo.png" width="1050"/>
 
-[![React Native Global Modal](https://img.shields.io/badge/-Extremely%20easy%20to%20create%20a%20React%20Native%20Component%20Library%20with%20both%20Stateful%20and%20Functional%20Component%20Examples-orange?style=for-the-badge)](https://github.com/WrathChaos/react-native-global-modal-2)
+[![React Native Global Modal](https://img.shields.io/badge/-%F0%9F%8C%8D%20Global%20modal%20and%20callable%20from%20anywhere%20on%20the%20app%20for%20React%20Native-orange?style=for-the-badge)](https://github.com/WrathChaos/react-native-global-modal-2)
 
 [![npm version](https://img.shields.io/npm/v/react-native-global-modal-2.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-global-modal-2)
 [![npm](https://img.shields.io/npm/dt/react-native-global-modal-2.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-global-modal-2)
