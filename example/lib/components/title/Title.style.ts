@@ -1,14 +1,14 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {},
   titleTextStyle: {
-    fontWeight: '500',
+    fontWeight: "500",
     fontSize: 16,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   titleContainer: {
     marginLeft: 12,
@@ -16,30 +16,30 @@ export default StyleSheet.create({
   iconContainer: {
     height: 30,
     width: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#E3F8FF',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#E3F8FF",
     borderRadius: 30,
   },
   iconImageStyle: {
     width: 13,
     height: 13,
-    tintColor: '#36A8DB',
+    tintColor: "#36A8DB",
   },
   closeButton: {
-    marginLeft: 'auto',
+    marginLeft: "auto",
   },
   closeButtonImageStyle: {
     width: 13,
     height: 13,
-    tintColor: '#8398AA',
+    tintColor: "#8398AA",
   },
   descriptionContainer: {
     marginTop: 8,
     marginLeft: 43,
   },
   descriptionTextStyle: {
-    color: '#627D99',
+    color: "#627D99",
     lineHeight: 20,
   },
 });

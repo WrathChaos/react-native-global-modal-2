@@ -10,8 +10,7 @@ import {
 /**
  * ? Local Imports
  */
-import AnimatedModal from './lib/AnimatedModal';
-import AnimatedModalController from './lib/AnimatedModalController';
+import AnimatedModal, {AnimatedModalController} from './lib';
 
 interface AppProps {
   style?: StyleProp<ViewStyle>;
