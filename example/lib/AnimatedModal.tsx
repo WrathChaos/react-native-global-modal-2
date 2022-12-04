@@ -3,28 +3,18 @@ import React, {
   forwardRef,
   useLayoutEffect,
   useImperativeHandle,
-  useState,
-} from "react";
-import {
-  StyleSheet,
-  Dimensions,
-  View,
-  StyleProp,
-  ViewStyle,
-  ImageSourcePropType,
-} from "react-native";
-import Modal, { ModalProps } from "react-native-modal";
+} from 'react';
+import {StyleSheet, View, StyleProp, ViewStyle} from 'react-native';
+import Modal, {ModalProps} from 'react-native-modal';
 import AnimatedModalController, {
   AnimatedModalRef,
-} from "./AnimatedModalController";
-import Title, { TitleProps } from "./components/title/Title";
-import Button, { ButtonProps } from "./components/button/Button";
+} from './AnimatedModalController';
+import Title, {TitleProps} from './components/title/Title';
+import Button, {ButtonProps} from './components/button/Button';
 import OutlineButton, {
   OutlineButtonProps,
-} from "./components/outline-button/OutlineButton";
-import useStateWithCallback from "./helpers/useStateWithCallback";
-
-const { width: ScreenWidth } = Dimensions.get("screen");
+} from './components/outline-button/OutlineButton';
+import useStateWithCallback from './helpers/useStateWithCallback';
 
 export interface ModalData {
   title: string;
@@ -47,7 +37,7 @@ export interface AnimatedModalProps extends Partial<ModalProps> {
 }
 
 const AnimatedModal: React.FC<AnimatedModalProps> = forwardRef(
-  ({ style, buttonsContainerStyle, TouchableComponent, ...rest }) => {
+  ({style, buttonsContainerStyle, TouchableComponent, ...rest}) => {
     const modalRef = useRef<AnimatedModalRef>();
     const [modalVisible, setModalVisible] = useStateWithCallback(false);
     const [data, setData] = useStateWithCallback<ModalData>(0);
@@ -127,14 +117,14 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 24,
     paddingBottom: 16,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   buttonsContainer: {
     marginTop: 16,
     marginLeft: 40,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   outlineButton: {
     marginLeft: 16,

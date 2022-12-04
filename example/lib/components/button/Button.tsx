@@ -1,14 +1,13 @@
-import React from "react";
-import { Pressable, Text, StyleProp, ViewStyle, TextStyle } from "react-native";
+import React from 'react';
+import {Pressable, Text, StyleProp, ViewStyle, TextStyle} from 'react-native';
 /**
  * ? Local Imports
  */
-import styles from "./Button.style";
+import styles from './Button.style';
 
 export interface ButtonProps {
-  text: string;
-  onPress: () => void;
-  // Optionals
+  text?: string;
+  onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   TouchableComponent?: any;

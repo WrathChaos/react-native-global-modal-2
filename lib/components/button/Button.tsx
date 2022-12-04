@@ -6,9 +6,8 @@ import { Pressable, Text, StyleProp, ViewStyle, TextStyle } from "react-native";
 import styles from "./Button.style";
 
 export interface ButtonProps {
-  text: string;
-  onPress: () => void;
-  // Optionals
+  text?: string;
+  onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   TouchableComponent?: any;

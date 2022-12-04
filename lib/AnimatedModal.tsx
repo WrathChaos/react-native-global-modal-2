@@ -3,16 +3,8 @@ import React, {
   forwardRef,
   useLayoutEffect,
   useImperativeHandle,
-  useState,
 } from "react";
-import {
-  StyleSheet,
-  Dimensions,
-  View,
-  StyleProp,
-  ViewStyle,
-  ImageSourcePropType,
-} from "react-native";
+import { StyleSheet, View, StyleProp, ViewStyle } from "react-native";
 import Modal, { ModalProps } from "react-native-modal";
 import AnimatedModalController, {
   AnimatedModalRef,
@@ -23,8 +15,6 @@ import OutlineButton, {
   OutlineButtonProps,
 } from "./components/outline-button/OutlineButton";
 import useStateWithCallback from "./helpers/useStateWithCallback";
-
-const { width: ScreenWidth } = Dimensions.get("screen");
 
 export interface ModalData {
   title: string;

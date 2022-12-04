@@ -37,15 +37,38 @@ import AnimatedModal, { AnimatedModalController } from "react-native-animated-mo
 
 ## Fundamental Usage
 
+In `App.tsx` or wherever your root is, simply put the `AnimatedModal` to root 
+You can open it with custom `ModalData` with `AnimatedModalController` 
+
+Note: This is just an example of the usage
 ```jsx
-<AnimatedModal
-    title="Update available"
-    description="A new software version is available for download"
-    primaryButtonText="Update"
-    outlineButtonText="Not now"
-    onPrimaryButtonPress={() => {}}
-    onOutlineButtonPress={() => {}}
-/>
+<NavigationContainer>
+  <MainStack/>
+  <AnimatedModal/>
+</NavigationContainer>
+```
+
+Call/control the animated modal with `AnimatedModalController`
+**Custom layout option is WIP, coming soon!**
+```js
+import { AnimatedModalController } from "react-native-animated-modal"
+
+// Example of ModalData
+// You can customize the modal as you want with this format
+// Custom layout option is WIP, coming soon!
+const data: ModalData = {
+  title: 'Update available',
+  description: 'A new software version is available for download',
+  primaryButtonText: 'Update',
+  outlineButtonText: 'Not now',
+  titleProps: {
+    imageSource: require('./assets/cross.png'),
+  },
+  onPrimaryButtonPress: () => {},
+  onOutlineButtonPress: () => {},
+};
+AnimatedModalController.show(data);
+AnimatedModalController.hide()
 ```
 
 
@@ -57,19 +80,7 @@ You can use any props from `react-native-modal` with prop drilling
 <AnimatedModal
     animationIn="fadeIn"
     animationOut="fadeOut"
-    title="Update available"
-    description="A new software version is available for download"
-    primaryButtonText="Update"
-    outlineButtonText="Not now"
-    onPrimaryButtonPress={() => {}}
-    onOutlineButtonPress={() => {}}
     onBackdropPress={AnimatedModalController.hide}
-    onShow={() => {
-      console.log('onShow');
-    }}
-    onHide={() => {
-      console.log('onHide');
-    }}
 />
 ```
 
@@ -133,7 +144,7 @@ should work of the example project.
   - [ ] Notification Type
   - [ ] One Button
   - [ ] One Outline Button
-- [ ] Custom Layout Feature
+- [ ] **Custom Layout Feature**
 - [ ] Write an article about the lib on Medium
 
 ## Credits 

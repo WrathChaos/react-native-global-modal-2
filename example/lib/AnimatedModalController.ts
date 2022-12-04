@@ -1,4 +1,5 @@
-import { MutableRefObject } from "react";
+import {MutableRefObject} from 'react';
+import {ModalData} from './AnimatedModal';
 
 export type AnimatedModalRef = {
   show: () => void;
@@ -12,7 +13,7 @@ export default class AnimatedModalController {
     this.modalRef = ref;
   };
 
-  static show = (data: any) => {
+  static show = (data: ModalData) => {
     // @ts-ignore
     this.modalRef.current?.show(data);
   };

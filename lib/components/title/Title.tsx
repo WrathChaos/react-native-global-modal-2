@@ -15,10 +15,10 @@ import styles from "./Title.style";
 
 export interface TitleProps {
   style?: StyleProp<ViewStyle>;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   imageSource?: ImageSourcePropType;
-  onClosePress: () => void;
+  onClosePress?: () => void;
 }
 
 const Title: React.FC<TitleProps> = ({

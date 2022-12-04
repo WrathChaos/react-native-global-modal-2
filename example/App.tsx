@@ -10,7 +10,7 @@ import {
 /**
  * ? Local Imports
  */
-import AnimatedModal, {AnimatedModalController} from './lib';
+import AnimatedModal, {AnimatedModalController, ModalData} from './lib';
 
 interface AppProps {
   style?: StyleProp<ViewStyle>;
@@ -22,7 +22,7 @@ const App: React.FC<AppProps> = () => {
       <TouchableOpacity
         style={styles.buttonStyle}
         onPress={() => {
-          AnimatedModalController.show({
+          const data: ModalData = {
             title: 'Update available',
             description: 'A new software version is available for download',
             primaryButtonText: 'Update',
@@ -32,7 +32,8 @@ const App: React.FC<AppProps> = () => {
             },
             onPrimaryButtonPress: () => {},
             onOutlineButtonPress: () => {},
-          });
+          };
+          AnimatedModalController.show(data);
         }}
       >
         <Text>Open Modal</Text>
