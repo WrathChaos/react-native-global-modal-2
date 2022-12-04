@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
@@ -9,11 +9,11 @@ import {
   Pressable,
   ImageStyle,
   TextStyle,
-} from "react-native";
+} from 'react-native';
 /**
  * ? Local Imports
  */
-import styles from "./Title.style";
+import styles from './Title.style';
 
 export interface TitleProps {
   style?: StyleProp<ViewStyle>;
@@ -41,7 +41,7 @@ const Title: React.FC<TitleProps> = ({
   titleContainerStyle,
   descriptionTextStyle,
   descriptionContainerStyle,
-  imageSource = require("../../local-assets/home.png"),
+  imageSource = require('../../local-assets/home.png'),
   onClosePress,
 }) => {
   const renderIcon = () => (
@@ -71,7 +71,7 @@ const Title: React.FC<TitleProps> = ({
   const renderCloseButton = () => (
     <Pressable style={styles.closeButton} onPress={onClosePress}>
       <Image
-        source={require("../../local-assets/cross.png")}
+        source={require('../../local-assets/cross.png')}
         style={styles.closeButtonImageStyle}
       />
     </Pressable>

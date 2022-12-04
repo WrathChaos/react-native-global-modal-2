@@ -10,10 +10,7 @@ import {
 /**
  * ? Local Imports
  */
-import GlobalModal, {
-  ModalController,
-  ModalData,
-} from 'react-native-global-modal-2';
+import GlobalModal, {ModalController, ModalData} from './lib';
 
 interface AppProps {
   style?: StyleProp<ViewStyle>;

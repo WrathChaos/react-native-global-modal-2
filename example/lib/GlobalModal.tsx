@@ -3,16 +3,16 @@ import React, {
   forwardRef,
   useLayoutEffect,
   useImperativeHandle,
-} from "react";
-import { StyleSheet, View, StyleProp, ViewStyle } from "react-native";
-import Modal, { ModalProps } from "react-native-modal";
-import ModalController, { GlobalModalRef } from "./ModalController";
-import Title, { TitleProps } from "./components/title/Title";
-import Button, { ButtonProps } from "./components/button/Button";
+} from 'react';
+import {StyleSheet, View, StyleProp, ViewStyle} from 'react-native';
+import Modal, {ModalProps} from 'react-native-modal';
+import ModalController, {GlobalModalRef} from './ModalController';
+import Title, {TitleProps} from './components/title/Title';
+import Button, {ButtonProps} from './components/button/Button';
 import OutlineButton, {
   OutlineButtonProps,
-} from "./components/outline-button/OutlineButton";
-import useStateWithCallback from "./helpers/useStateWithCallback";
+} from './components/outline-button/OutlineButton';
+import useStateWithCallback from './helpers/useStateWithCallback';
 
 export interface ModalData {
   customLayout?: React.ReactNode | React.ReactNode[];
@@ -36,7 +36,7 @@ export interface GlobalModalProps extends Partial<ModalProps> {
 }
 
 const GlobalModal: React.FC<GlobalModalProps> = forwardRef(
-  ({ style, buttonsContainerStyle, TouchableComponent, ...rest }, _) => {
+  ({style, buttonsContainerStyle, TouchableComponent, ...rest}, _) => {
     const modalRef = useRef<GlobalModalRef>();
     const [modalVisible, setModalVisible] = useStateWithCallback(false);
     const [data, setData] = useStateWithCallback<ModalData>(0);
@@ -125,14 +125,14 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 24,
     paddingBottom: 16,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   buttonsContainer: {
     marginTop: 16,
     marginLeft: 40,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   outlineButton: {
     marginLeft: 16,
