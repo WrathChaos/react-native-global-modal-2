@@ -1,140 +1,86 @@
 import React, {
-  useRef,
   forwardRef,
-  useLayoutEffect,
   useImperativeHandle,
-} from 'react';
-import {StyleSheet, View, StyleProp, ViewStyle} from 'react-native';
-import Modal, {ModalProps} from 'react-native-modal';
-import ModalController, {GlobalModalRef} from './ModalController';
-import Title, {TitleProps} from './components/title/Title';
-import Button, {ButtonProps} from './components/button/Button';
-import OutlineButton, {
-  OutlineButtonProps,
-} from './components/outline-button/OutlineButton';
-import useStateWithCallback from './helpers/useStateWithCallback';
+  useLayoutEffect,
+  useCallback,
+} from "react";
+import { StyleSheet, View, StyleProp, ViewStyle } from "react-native";
+import Modal, { ModalProps } from "react-native-modal";
+import ModalController from "./ModalController";
+import useStateWithCallback from "./helpers/useStateWithCallback";
 
 export interface ModalData {
-  customLayout?: React.ReactNode | React.ReactNode[];
-  title?: string;
-  description?: string;
-  primaryButtonText?: string;
-  outlineButtonText?: string;
-  onPrimaryButtonPress?: () => void;
-  onOutlineButtonPress?: () => void;
-  titleProps?: TitleProps;
-  buttonProps?: ButtonProps;
-  outlineButtonProps?: OutlineButtonProps;
+  content: React.ReactNode;
   onShow?: () => void;
   onHide?: () => void;
 }
 
 export interface GlobalModalProps extends Partial<ModalProps> {
-  TouchableComponent?: any;
-  style?: StyleProp<ViewStyle>;
-  buttonsContainerStyle?: StyleProp<ViewStyle>;
+  defaultStyle?: StyleProp<ViewStyle>;
 }
 
-const GlobalModal: React.FC<GlobalModalProps> = forwardRef(
-  ({style, buttonsContainerStyle, TouchableComponent, ...rest}, _) => {
-    const modalRef = useRef<GlobalModalRef>();
-    const [modalVisible, setModalVisible] = useStateWithCallback(false);
-    const [data, setData] = useStateWithCallback<ModalData>(0);
-    const {
-      title,
-      description,
-      primaryButtonText,
-      outlineButtonText,
-      onShow,
-      onHide,
-      onPrimaryButtonPress,
-      onOutlineButtonPress,
-      buttonProps,
-      outlineButtonProps,
-      titleProps,
-      customLayout,
-    } = data;
+export type GlobalModalRef = {
+  show: (data: ModalData) => void;
+  hide: () => void;
+};
 
-    useLayoutEffect(() => {
-      ModalController.setModalRef(modalRef);
+const GlobalModal = forwardRef<GlobalModalRef, GlobalModalProps>(
+  ({ defaultStyle, ...rest }, ref) => {
+    const [modalVisible, setModalVisible] = useStateWithCallback(false);
+    const [data, setData] = useStateWithCallback<ModalData>({
+      content: null
+    });
+
+    const show = useCallback((modalData: ModalData) => {
+      setData(modalData);
+      setModalVisible(true, () => {
+        modalData.onShow?.();
+      });
     }, []);
 
-    useImperativeHandle(
-      modalRef,
-      () => ({
-        show: (_data?: any) => {
-          setData(_data, () => {
-            setModalVisible(true, () => {
-              onShow?.();
-            });
-          });
-        },
-        hide: () => {
-          setModalVisible(false, () => {
-            onHide?.();
-          });
-        },
-      }),
-      [onHide, onShow, setData, setModalVisible],
-    );
+    const hide = useCallback(() => {
+      setModalVisible(false, () => {
+        data.onHide?.();
+      });
+    }, [data]);
 
-    if (customLayout) {
-      return (
-        <Modal {...rest} isVisible={modalVisible}>
-          {customLayout}
-        </Modal>
-      );
-    }
+    useImperativeHandle(ref, () => ({
+      show,
+      hide,
+    }), [show, hide]);
+
+    useLayoutEffect(() => {
+      if (ref) {
+        ModalController.setModalRef(ref as React.MutableRefObject<GlobalModalRef>);
+      }
+    }, [ref]);
 
     return (
-      <Modal {...rest} isVisible={modalVisible}>
-        <View style={[styles.container, style]}>
-          <Title
-            title={title}
-            description={description}
-            onClosePress={ModalController.hide}
-            {...titleProps}
-          />
-          <View style={[styles.buttonsContainer, buttonsContainerStyle]}>
-            <Button
-              text={primaryButtonText}
-              TouchableComponent={TouchableComponent}
-              {...buttonProps}
-              onPress={onPrimaryButtonPress}
-            />
-            <OutlineButton
-              text={outlineButtonText}
-              style={styles.outlineButton}
-              TouchableComponent={TouchableComponent}
-              {...outlineButtonProps}
-              onPress={onOutlineButtonPress}
-            />
-          </View>
+      <Modal 
+        {...rest} 
+        isVisible={modalVisible}
+        animationIn="fadeIn"
+        animationOut="fadeOut"
+        backdropTransitionOutTiming={0}
+        hideModalContentWhileAnimating
+        useNativeDriver
+      >
+        <View style={[styles.container, defaultStyle]}>
+          {data.content}
         </View>
       </Modal>
     );
   },
 );
 
+GlobalModal.displayName = 'GlobalModal';
+
 export default GlobalModal;
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 16,
-    paddingTop: 24,
-    paddingLeft: 24,
-    paddingRight: 24,
-    paddingBottom: 16,
-    backgroundColor: '#fff',
-  },
-  buttonsContainer: {
-    marginTop: 16,
-    marginLeft: 40,
-    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-  outlineButton: {
-    marginLeft: 16,
   },
 });

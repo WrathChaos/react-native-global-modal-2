@@ -2,23 +2,30 @@ import { MutableRefObject } from "react";
 import { ModalData } from "./GlobalModal";
 
 export type GlobalModalRef = {
-  show: () => void;
+  show: (data: ModalData) => void;
   hide: () => void;
 };
 
-export default class ModalController {
-  static modalRef: MutableRefObject<GlobalModalRef>;
-  static setModalRef = (ref: any) => {
-    // @ts-ignore
-    this.modalRef = ref;
-  };
+let modalRef: MutableRefObject<GlobalModalRef> | null = null;
 
-  static show = (data: ModalData) => {
-    // @ts-ignore
-    this.modalRef.current?.show(data);
-  };
-  static hide = () => {
-    // @ts-ignore
-    this.modalRef.current?.hide();
-  };
-}
+const ModalController = {
+  setModalRef: (ref: MutableRefObject<GlobalModalRef>) => {
+    modalRef = ref;
+  },
+  show: (data: ModalData) => {
+    if (!modalRef?.current) {
+      console.warn('Modal reference not set. Make sure GlobalModal is mounted.');
+      return;
+    }
+    modalRef.current.show(data);
+  },
+  hide: () => {
+    if (!modalRef?.current) {
+      console.warn('Modal reference not set. Make sure GlobalModal is mounted.');
+      return;
+    }
+    modalRef.current.hide();
+  },
+};
+
+export default ModalController;

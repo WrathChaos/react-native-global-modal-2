@@ -37,10 +37,8 @@ import GlobalModal, { ModalController } from "react-native-global-modal-2"
 
 ## Fundamental Usage
 
-In `App.tsx` or wherever your root is, simply put the `GlobalModal` to root 
-You can open it with custom `ModalData` with `ModalController` 
+In `App.tsx` or wherever your root is, simply put the `GlobalModal` to root:
 
-Note: This is just an example of the usage
 ```jsx
 <NavigationContainer>
   <MainStack/>
@@ -48,29 +46,70 @@ Note: This is just an example of the usage
 </NavigationContainer>
 ```
 
-Call/control the animated modal with `ModalController`
-```js
-import { ModalController, ModalData } from "react-native-global-modal-2"
+Call/control the modal with `ModalController`:
 
-// Example of ModalData
-// You can customize the modal as you want with this format
-// **Custom layout** option is also available!
-const data: ModalData = {
-  title: 'Update available',
-  description: 'A new software version is available for download',
-  primaryButtonText: 'Update',
-  outlineButtonText: 'Not now',
-  titleProps: {
-    imageSource: require('./assets/cross.png'),
+```jsx
+import { ModalController } from "react-native-global-modal-2"
+
+// Show modal with custom content
+ModalController.show({
+  content: (
+    <View
+      style={{
+        borderRadius: 16,
+        padding: 24,
+        backgroundColor: '#fff',
+      }}>
+      <Text>Hello World</Text>
+      <Button 
+        title="Close" 
+        onPress={() => ModalController.hide()} 
+      />
+    </View>
+  ),
+  onShow: () => {
+    console.log('Modal shown');
   },
-  onPrimaryButtonPress: () => {},
-  onOutlineButtonPress: () => {},
-};
-// Show
-ModalController.show(data);
-// Hide
-ModalController.hide()
+  onHide: () => {
+    console.log('Modal hidden');
+  }
+});
+
+// Hide the modal
+ModalController.hide();
 ```
+
+## Customization
+
+You can customize the default container style and modal props:
+
+```jsx 
+<GlobalModal
+  animationIn="fadeIn"
+  animationOut="fadeOut"
+  onBackdropPress={ModalController.hide}
+  defaultStyle={{
+    padding: 20,
+  }}
+/>
+```
+
+## Configuration - Props
+
+### GlobalModal Props
+
+| Property     |   Type   |  Default  | Description                                     |
+|-------------|:--------:|:---------:|-------------------------------------------------|
+| defaultStyle| ViewStyle|  default  | Default style for the modal container           |
+| ...ModalProps|   any    |  default  | Any prop from react-native-modal                |
+
+### ModalData Props
+
+| Property |   Type    |  Default  | Description                                     |
+|----------|:---------:|:---------:|-------------------------------------------------|
+| content  | ReactNode | undefined | The content to display in the modal             |
+| onShow   | function  | undefined | Called when the modal is shown                  |
+| onHide   | function  | undefined | Called when the modal is hidden                 |
 
 ## Custom Layout Usage
 
