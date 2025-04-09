@@ -9,9 +9,19 @@
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
 
 <p align="center">
-  <img alt="React Native Global Modal"
-        src="assets/Screenshots/react-native-animated-modal.png" />
+  <img alt="React Native Global Modal Demo" src="assets/for-docs/react-native-global-modal-2.gif" width="360"/>
 </p>
+
+# Features
+
+✨ Global Modal Accessible from Anywhere in Your App
+🎯 Three Modal Types Out of the Box:
+  - Simple Modal
+  - Styled Modal with Animations
+  - Full Screen Modal
+🎨 Fully Customizable Styling
+🔄 Smooth Animations
+📱 iOS and Android Support
 
 # Installation
 
@@ -21,11 +31,15 @@ Add the dependency:
 npm i react-native-global-modal-2
 ```
 
-## Peer dependencies
+## Peer Dependencies
+
+<details>
+<summary>Click to expand</summary>
 
 ```json
 "react-native-modal": "^13.0.1"
 ```
+</details>
 
 # Usage
 
@@ -35,192 +49,446 @@ npm i react-native-global-modal-2
 import GlobalModal, { ModalController } from "react-native-global-modal-2"
 ```
 
-## Fundamental Usage
+## Basic Setup
 
-In `App.tsx` or wherever your root is, simply put the `GlobalModal` to root:
+First, import the necessary components:
 
 ```jsx
-<NavigationContainer>
-  <MainStack/>
-  <GlobalModal/>
-</NavigationContainer>
+import GlobalModal, { ModalController } from "react-native-global-modal-2"
 ```
 
-Call/control the modal with `ModalController`:
+Add the `GlobalModal` component to your app's root:
 
 ```jsx
-import { ModalController } from "react-native-global-modal-2"
+// App.tsx or your root component
+import React, { useRef } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import GlobalModal, { ModalController, GlobalModalRef } from "react-native-global-modal-2";
 
-// Show modal with custom content
-ModalController.show({
-  content: (
-    <View
-      style={{
-        borderRadius: 16,
-        padding: 24,
-        backgroundColor: '#fff',
-      }}>
-      <Text>Hello World</Text>
-      <Button 
-        title="Close" 
-        onPress={() => ModalController.hide()} 
+const App = () => {
+  const modalRef = useRef<GlobalModalRef>(null);
+
+  React.useEffect(() => {
+    if (modalRef.current) {
+      ModalController.setModalRef(modalRef);
+    }
+  }, []);
+
+  return (
+    <NavigationContainer>
+      <MainStack />
+      <GlobalModal
+        ref={modalRef}
+        animationIn="fadeIn"
+        animationOut="fadeOut"
+        onBackdropPress={ModalController.hide}
       />
-    </View>
-  ),
+    </NavigationContainer>
+  );
+};
+```
+
+## Modal Types and Examples
+
+### 1. Simple Modal
+
+Basic modal with minimal styling:
+
+```jsx
+import { ModalController } from "react-native-global-modal-2";
+
+const showSimpleModal = () => {
+  ModalController.show({
+    content: (
+      <View style={styles.modalContent}>
+        <Text style={styles.title}>Simple Modal</Text>
+        <Text style={styles.text}>This is a simple modal example</Text>
+        <Button title="Close" onPress={() => ModalController.hide()} />
+      </View>
+    ),
+  });
+};
+
+const styles = StyleSheet.create({
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  text: {
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+});
+```
+
+### 2. Styled Modal
+
+Modal with custom styling and animations:
+
+```jsx
+const showStyledModal = () => {
+  ModalController.show({
+    content: (
+      <View style={styles.styledContent}>
+        <Text style={styles.styledTitle}>Styled Modal</Text>
+        <Text style={styles.styledText}>
+          Custom styled modal with beautiful design
+        </Text>
+        <TouchableOpacity
+          style={styles.closeButton}
+          onPress={() => ModalController.hide()}>
+          <Text style={styles.buttonText}>Close</Text>
+        </TouchableOpacity>
+      </View>
+    ),
+  });
+};
+
+const styles = StyleSheet.create({
+  styledContent: {
+    backgroundColor: '#4A90E2',
+    padding: 30,
+    borderRadius: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  styledTitle: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  styledText: {
+    color: '#fff',
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  closeButton: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: '#4A90E2',
+    fontWeight: '600',
+  },
+});
+```
+
+### 3. Full Screen Modal
+
+Modal that covers the entire screen:
+
+```jsx
+const showFullScreenModal = () => {
+  ModalController.show({
+    content: (
+      <View style={styles.fullScreenContent}>
+        <Text style={styles.fullScreenTitle}>Full Screen Modal</Text>
+        <Text style={styles.fullScreenText}>
+          This modal takes up the entire screen
+        </Text>
+        <TouchableOpacity
+          style={styles.fullScreenButton}
+          onPress={() => ModalController.hide()}>
+          <Text style={styles.fullScreenButtonText}>Close</Text>
+        </TouchableOpacity>
+      </View>
+    ),
+    isFullScreen: true,
+    containerStyle: {
+      backgroundColor: '#fff',
+    },
+  });
+};
+
+const styles = StyleSheet.create({
+  fullScreenContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  fullScreenTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  fullScreenText: {
+    fontSize: 18,
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  fullScreenButton: {
+    backgroundColor: '#102B43',
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  fullScreenButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});
+```
+
+## Advanced Usage
+
+### Custom Animations
+
+You can customize the modal animations using any animation type from `react-native-modal`:
+
+```jsx
+<GlobalModal
+  animationIn="slideInUp"  // or fadeIn, bounceIn, etc.
+  animationOut="slideOutDown"  // or fadeOut, bounceOut, etc.
+  animationInTiming={500}  // animation duration in ms
+  animationOutTiming={500}
+  backdropTransitionInTiming={500}
+  backdropTransitionOutTiming={500}
+/>
+```
+
+### Modal with Form
+
+Example of a modal containing a form:
+
+```jsx
+const showFormModal = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = () => {
+    // Handle form submission
+    console.log({ name, email });
+    ModalController.hide();
+  };
+
+  ModalController.show({
+    content: (
+      <View style={styles.formContent}>
+        <Text style={styles.formTitle}>Contact Form</Text>
+        <TextInput
+          style={styles.input}
+          value={name}
+          onChangeText={setName}
+          placeholder="Enter your name"
+        />
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Enter your email"
+          keyboardType="email-address"
+        />
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={handleSubmit}>
+          <Text style={styles.submitText}>Submit</Text>
+        </TouchableOpacity>
+      </View>
+    ),
+  });
+};
+```
+
+### Modal with Loading State
+
+Example of a loading modal:
+
+```jsx
+const showLoadingModal = () => {
+  ModalController.show({
+    content: (
+      <View style={styles.loadingContent}>
+        <ActivityIndicator size="large" color="#4A90E2" />
+        <Text style={styles.loadingText}>Loading...</Text>
+      </View>
+    ),
+  });
+
+  // Hide the modal after some async operation
+  setTimeout(() => {
+    ModalController.hide();
+  }, 2000);
+};
+```
+
+### Handling Modal Lifecycle
+
+You can use the `onShow` and `onHide` callbacks:
+
+```jsx
+ModalController.show({
+  content: <YourModalContent />,
   onShow: () => {
     console.log('Modal shown');
+    // Perform actions when modal is shown
   },
   onHide: () => {
     console.log('Modal hidden');
-  }
+    // Clean up or perform actions when modal is hidden
+  },
 });
-
-// Hide the modal
-ModalController.hide();
 ```
 
-## Customization
+## Best Practices
 
-You can customize the default container style and modal props:
+1. **Modal Reference**: Always set up the modal reference in your root component to ensure it's accessible throughout your app.
 
-```jsx 
-<GlobalModal
-  animationIn="fadeIn"
-  animationOut="fadeOut"
-  onBackdropPress={ModalController.hide}
-  defaultStyle={{
+2. **Error Handling**: Handle cases where the modal reference might not be set:
+```jsx
+const showModal = () => {
+  try {
+    ModalController.show({
+      content: <YourContent />,
+    });
+  } catch (error) {
+    console.warn('Failed to show modal:', error);
+  }
+};
+```
+
+3. **Styling**: Keep modal styles consistent throughout your app by defining a common style theme:
+```jsx
+const modalStyles = {
+  content: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
     padding: 20,
-  }}
-/>
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  // ... other common styles
+};
 ```
 
-## Configuration - Props
+4. **Performance**: For modals with complex content, consider using `useMemo` or `useCallback`:
+```jsx
+const ModalContent = React.memo(() => {
+  const handlePress = useCallback(() => {
+    // Handle press
+  }, []);
+
+  return (
+    <View>
+      <Text>Complex Modal Content</Text>
+      <Button onPress={handlePress} title="Action" />
+    </View>
+  );
+});
+```
+
+## Configuration
 
 ### GlobalModal Props
 
-| Property     |   Type   |  Default  | Description                                     |
-|-------------|:--------:|:---------:|-------------------------------------------------|
-| defaultStyle| ViewStyle|  default  | Default style for the modal container           |
-| ...ModalProps|   any    |  default  | Any prop from react-native-modal                |
+| Property      | Type       | Description                                     |
+|--------------|:----------:|-------------------------------------------------|
+| defaultStyle | ViewStyle  | Default style for the modal container           |
+| animationIn  | string    | Entry animation type (e.g., "fadeIn", "slideInDown") |
+| animationOut | string    | Exit animation type (e.g., "fadeOut", "slideOutUp") |
+| ...rest      | ModalProps | Any prop from react-native-modal                |
 
 ### ModalData Props
 
-| Property |   Type    |  Default  | Description                                     |
-|----------|:---------:|:---------:|-------------------------------------------------|
-| content  | ReactNode | undefined | The content to display in the modal             |
-| onShow   | function  | undefined | Called when the modal is shown                  |
-| onHide   | function  | undefined | Called when the modal is hidden                 |
+| Property       | Type       | Description                                     |
+|---------------|:----------:|-------------------------------------------------|
+| content       | ReactNode  | Modal content to display                        |
+| isFullScreen  | boolean   | Whether to show as full screen modal            |
+| containerStyle| ViewStyle | Style for the modal container                   |
+| onShow        | function  | Callback when modal is shown                    |
+| onHide        | function  | Callback when modal is hidden                   |
 
-## Custom Layout Usage
+## Styling Examples
 
-You can completely use your own layout with `customLayout`
-
-```jsx 
-import { ModalController, ModalData } from "react-native-global-modal-2"
-
-
-const data: ModalData = {
-  customLayout: (
-    <View
-      style={{
-        borderRadius: 16,
-        paddingTop: 24,
-        paddingLeft: 24,
-        paddingRight: 24,
-        paddingBottom: 16,
-        backgroundColor: '#fff',
-      }}>
-      <Text>Hello</Text>
-    </View>
-  ),
-};
-ModalController.show(data);
+### Simple Modal
+```jsx
+const styles = StyleSheet.create({
+  modalContent: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 24,
+    alignItems: 'center',
+  },
+});
 ```
 
-
-### Customized Example
-
-You can use any props from `react-native-modal` with prop drilling
-
-```jsx 
-<GlobalModal
-  animationIn="fadeIn"
-  animationOut="fadeOut"
-  onBackdropPress={ModalController.hide}
-/>
+### Styled Modal
+```jsx
+const styles = StyleSheet.create({
+  styledContent: {
+    backgroundColor: '#4A90E2',
+    borderRadius: 20,
+    padding: 30,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+});
 ```
 
-## Example Project 😍
+### Full Screen Modal
+```jsx
+const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+```
 
-You can check out the example project 🥰
+## Example Project
 
-Simply run
+To run the example project:
 
-- `npm i`
-- `react-native run-ios/android`
-
-should work of the example project.
-
-# Configuration - Props
-
-## Fundamentals
-
-| Property             |   Type   |  Default  | Description                                     |
-|----------------------|:--------:| :-------: |-------------------------------------------------|
-| title                |  string  | undefined | change the title                                |
-| description          |  string  | undefined | change the descrition                           |
-| primaryButtonText    |  string  | undefined | change the primary button's text                |
-| onPrimaryButtonPress | function | undefined | set function when the primary button is pressed |
-| onOutlineButtonPress | function | undefined | set function when the primary button is pressed |
-
-## Customization (Optionals)
-
-| Property       |    Type     |  Default  | Description                                                       |
-| -------------- |:-----------:|:---------:|-------------------------------------------------------------------|
-| style          |  ViewStyle  |  default  | set or override the style object for the main container           |
-| buttonsContainerStyle    |  ViewStyle  |  default  | set or override the style object for the buttons' container style |
-| TouchableComponent |  component  | Pressable | set your own component instead of default `Pressable` component   |
-| buttonProps | ButtonProps |  default  | change button's props **(primary button)**                        |
-| outlineButtonProps | OutlineButtonProps |  default  | change button's props **(outline button)**                        |
-
-
-## Customization [Button] Component
-
-| Property           |   Type    |  Default  | Description                                            |
-|--------------------|:---------:|:---------:|--------------------------------------------------------|
-| title              |  string   | undefined | change the title                                       |
-| onPress | function  | undefined | set your function                                      |
-| style              | ViewStyle |  default  | set or override the style object for the main container |
-| textStyle          | TextStyle |  default  | set or override the style object for the text style    |
-
-
-## Customization [OutlineButton] Component
-
-| Property           |   Type    |  Default  | Description                                            |
-|--------------------|:---------:|:---------:|--------------------------------------------------------|
-| title              |  string   | undefined | change the title                                       |
-| onPress | function  | undefined | set your function                                      |
-| style              | ViewStyle |  default  | set or override the style object for the main container |
-| textStyle          | TextStyle |  default  | set or override the style object for the text style    |
+1. Clone the repository
+2. Navigate to the example directory
+3. Run:
+```bash
+npm install
+npx pod-install  # for iOS
+npm run ios/android
+```
 
 ## Future Plans
 
 - [x] ~~LICENSE~~
-- [ ] More built-in modal types
-  - [ ] Notification Type
-  - [ ] One Button
-  - [ ] One Outline Button
 - [x] ~~Custom Layout Feature~~
-- [ ] More and better screenshots
-- [ ] Write an article about the lib on Medium
+- [x] Full Screen Modal Support
+- [ ] More built-in modal types
+  - [ ] Alert Modal
+  - [ ] Action Sheet Modal
+  - [ ] Bottom Sheet Modal
+- [ ] Gesture Controls
+- [ ] Accessibility Improvements
+- [ ] More Examples and Documentation
 
 ## Credits 
 
-I inspired from [Roycechua's global modal example](https://github.com/roycechua/rn-global-modal-control-example)
-Thank you so much [Roycechua](https://github.com/roycechua) 😍
-
-I heavily inspired the design by [Patrick Marx](https://dribbble.com/shots/10762430/attachments/2430949?mode=media)
-Thank you so much sir 🥳
+- Design inspiration: [Patrick Marx](https://dribbble.com/shots/10762430/attachments/2430949?mode=media)
+- Original concept: [Roycechua's global modal example](https://github.com/roycechua/rn-global-modal-control-example)
 
 ## Author
 
