@@ -19,7 +19,7 @@ const App: React.FC<AppProps> = () => {
 
   React.useEffect(() => {
     if (modalRef.current) {
-      ModalController.setModalRef(modalRef);
+      ModalController.setModalRef(modalRef as React.MutableRefObject<GlobalModalRef>);
     }
   }, []);
 
@@ -70,6 +70,10 @@ const App: React.FC<AppProps> = () => {
           </TouchableOpacity>
         </View>
       ),
+      isFullScreen: true,
+      containerStyle: {
+        backgroundColor: '#fff'
+      }
     });
   };
 
@@ -178,10 +182,11 @@ const styles = StyleSheet.create({
   },
   fullScreenModal: {
     flex: 1,
-    backgroundColor: '#fff',
+    width: '100%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: 0,
   },
   fullScreenTitle: {
     fontSize: 28,
