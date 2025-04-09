@@ -16,7 +16,7 @@ import ModalController from "./ModalController";
 import useStateWithCallback from "./helpers/useStateWithCallback";
 
 export interface ModalData {
-  content: React.ReactNode;
+  content: any;
   onShow?: () => void;
   onHide?: () => void;
   isFullScreen?: boolean;
