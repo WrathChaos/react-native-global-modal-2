@@ -14,14 +14,18 @@ const ModalController = {
   },
   show: (data: ModalData) => {
     if (!modalRef?.current) {
-      console.warn('Modal reference not set. Make sure GlobalModal is mounted.');
+      console.warn(
+        "Modal reference not set. Make sure GlobalModal is mounted.",
+      );
       return;
     }
     modalRef.current.show(data);
   },
   hide: () => {
     if (!modalRef?.current) {
-      console.warn('Modal reference not set. Make sure GlobalModal is mounted.');
+      console.warn(
+        "Modal reference not set. Make sure GlobalModal is mounted.",
+      );
       return;
     }
     modalRef.current.hide();

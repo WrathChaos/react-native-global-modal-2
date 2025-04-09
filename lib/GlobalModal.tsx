@@ -4,7 +4,13 @@ import React, {
   useLayoutEffect,
   useCallback,
 } from "react";
-import { StyleSheet, View, StyleProp, ViewStyle, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  StyleProp,
+  ViewStyle,
+  Dimensions,
+} from "react-native";
 import Modal, { ModalProps } from "react-native-modal";
 import ModalController from "./ModalController";
 import useStateWithCallback from "./helpers/useStateWithCallback";
@@ -26,7 +32,7 @@ export type GlobalModalRef = {
   hide: () => void;
 };
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 const GlobalModal = forwardRef<GlobalModalRef, GlobalModalProps>(
   ({ defaultStyle, ...rest }, ref) => {
@@ -49,14 +55,20 @@ const GlobalModal = forwardRef<GlobalModalRef, GlobalModalProps>(
       });
     }, [data]);
 
-    useImperativeHandle(ref, () => ({
-      show,
-      hide,
-    }), [show, hide]);
+    useImperativeHandle(
+      ref,
+      () => ({
+        show,
+        hide,
+      }),
+      [show, hide],
+    );
 
     useLayoutEffect(() => {
       if (ref) {
-        ModalController.setModalRef(ref as React.MutableRefObject<GlobalModalRef>);
+        ModalController.setModalRef(
+          ref as React.MutableRefObject<GlobalModalRef>,
+        );
       }
     }, [ref]);
 
@@ -68,8 +80,8 @@ const GlobalModal = forwardRef<GlobalModalRef, GlobalModalProps>(
     ];
 
     return (
-      <Modal 
-        {...rest} 
+      <Modal
+        {...rest}
         isVisible={modalVisible}
         animationIn={data.isFullScreen ? "fadeIn" : "slideInDown"}
         animationOut={data.isFullScreen ? "fadeOut" : "slideOutUp"}
@@ -78,22 +90,20 @@ const GlobalModal = forwardRef<GlobalModalRef, GlobalModalProps>(
         useNativeDriver
         style={[
           styles.modal,
-          data.isFullScreen ? styles.fullScreenModal : styles.centeredModal
+          data.isFullScreen ? styles.fullScreenModal : styles.centeredModal,
         ]}
         coverScreen
         backdropColor="rgba(0, 0, 0, 0.5)"
         statusBarTranslucent
         propagateSwipe
       >
-        <View style={containerStyle}>
-          {data.content}
-        </View>
+        <View style={containerStyle}>{data.content}</View>
       </Modal>
     );
   },
 );
 
-GlobalModal.displayName = 'GlobalModal';
+GlobalModal.displayName = "GlobalModal";
 
 export default GlobalModal;
 
@@ -105,32 +115,32 @@ const styles = StyleSheet.create({
   fullScreenModal: {
     margin: 0,
     padding: 0,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   centeredModal: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   baseContainer: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   fullScreenContainer: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
+    alignItems: "stretch",
+    justifyContent: "flex-start",
     margin: 0,
     padding: 0,
   },
   defaultContainer: {
-    width: '90%',
+    width: "90%",
     maxWidth: 400,
     minHeight: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
