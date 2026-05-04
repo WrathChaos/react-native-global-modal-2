@@ -1,3 +1,40 @@
+# ⚠️ This library is sunset — please use [`react-native-modalkit`](https://github.com/kuraydev/react-native-modalkit) instead
+
+`react-native-global-modal-2` is **no longer maintained**. It depends on
+[`react-native-modal`](https://github.com/react-native-modal/react-native-modal),
+which is itself unmaintained and has no support for the React Native
+**New Architecture** (Fabric / TurboModules).
+
+I rebuilt it from the ground up as
+[**`react-native-modalkit`**](https://github.com/kuraydev/react-native-modalkit) —
+same imperative `ModalManager` API, plus everything that was on this
+library's roadmap (alerts, action sheets, bottom sheets, gestures,
+accessibility), now driven by **Reanimated 3** and
+**`react-native-gesture-handler` v2**, and built for **RN 0.78+** /
+**New Architecture**.
+
+```sh
+npm install react-native-modalkit react-native-reanimated react-native-gesture-handler
+```
+
+Migration is straightforward — the imperative API maps 1:1:
+
+| `react-native-global-modal-2`           | `react-native-modalkit`                          |
+| --------------------------------------- | ------------------------------------------------ |
+| `<GlobalModal>` host                    | `<ModalProvider>`                                |
+| `ModalController.setModalRef(ref)`      | (not needed — `ModalManager` is a singleton)     |
+| `ModalController.show(content)`         | `ModalManager.show(<Modal>{content}</Modal>)`    |
+| `ModalController.hide()`                | `ModalManager.hide(id)` / `ModalManager.hideAll()` |
+| Three modal "types" (simple/styled/full)| `position="center" \| "top" \| "bottom" \| "fullscreen"` |
+
+→ **[Read the modalkit README](https://github.com/kuraydev/react-native-modalkit#readme)**
+→ **[Open an issue or migration question](https://github.com/kuraydev/react-native-modalkit/issues)**
+
+This repository will be archived. The original README is preserved below
+for reference.
+
+---
+
 <img alt="React Native Global Modal" src="assets/logo.png" width="1050"/>
 
 [![React Native Global Modal](https://img.shields.io/badge/-%F0%9F%8C%8D%20Global%20modal%20and%20callable%20from%20anywhere%20on%20the%20app%20for%20React%20Native-orange?style=for-the-badge)](https://github.com/WrathChaos/react-native-global-modal-2)
